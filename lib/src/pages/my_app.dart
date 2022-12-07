@@ -2,6 +2,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:smart_hospital_admin/src/pages/login/login_page.dart';
 
 import '../services/navigation_service.dart';
 import '../utils/app_theme.dart';
@@ -39,7 +40,7 @@ class _MyAppState extends State<MyApp> {
       builder: BotToastInit(),
       navigatorObservers: [BotToastNavigatorObserver()],
       debugShowCheckedModeBanner: false,
-      home: DashboardPage(),
+      home: LoginPage(),
     );
   }
 }

@@ -29,6 +29,9 @@ dependencies:
   bot_toast: ^4.0.3
   transparent_image: ^2.0.0
   intl: ^0.17.0
+  fl_chart: ^0.55.1
+  syncfusion_flutter_charts: ^20.2.49
+  syncfusion_flutter_gauges: ^20.2.49
 
 
 dev_dependencies:
@@ -36,11 +39,11 @@ dev_dependencies:
     sdk: flutter
 
 
-
-
 flutter:
 
-
   uses-material-design: true
+
+  assets:
+    - lib/src/assets/images/
 
 
