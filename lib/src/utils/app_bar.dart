@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_hospital_admin/src/utils/app_theme.dart';
 
 MyAppBar({required String title, required BuildContext context, Widget? action, bool showBack = false}) => AppBar(
       title: Text(
@@ -28,5 +29,6 @@ Widget AppBarAction({
     IconButton(
       onPressed: onPressed,
       icon: icon,
+      color: AppColor.iconColor,
       splashRadius: 18,
     );

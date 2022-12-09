@@ -38,6 +38,11 @@ class _MyAppState extends State<MyApp> {
       title: '${Constants.appName}',
       theme: AppTheme.primaryTheme,
       builder: BotToastInit(),
+      initialRoute: '/login',
+      routes: {
+        '/login': (context) => const LoginPage(),
+        '/dashboard': (context) => const DashboardPage(),
+      },
       navigatorObservers: [BotToastNavigatorObserver()],
       debugShowCheckedModeBanner: false,
       home: LoginPage(),
