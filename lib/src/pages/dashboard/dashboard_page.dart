@@ -156,8 +156,12 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   Widget buildTotalVisit() {
-    var _total = dataOfDay.data?.countPatient ?? 0;
     var _lastUpdate = dataOfDay.data?.lastUpdated ?? "";
+
+    var _countMale = dataOfDay.data?.count?.male ?? 0;
+    var _countFemale = dataOfDay.data?.count?.female ?? 0;
+
+    var _total = _countMale + _countFemale;
 
     return Card(
       child: Container(
@@ -184,6 +188,107 @@ class _DashboardPageState extends State<DashboardPage> {
               style: TextStyle(fontSize: 12, color: AppColor.textPrimaryColor.withOpacity(0.5)),
             ),
             SizedBox(height: 10),
+            Divider(),
+            Visibility(
+              visible: true,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "Male",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: AppColor.textPrimaryColor,
+                              ),
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  "$_countMale",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColor.textPrimaryColor,
+                                  ),
+                                ),
+                                SizedBox(width: 15),
+                                Text(
+                                  "Patient(s)",
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: AppColor.textSecondaryColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  VerticalDivider(
+                    width: 20,
+                    thickness: 1,
+                    indent: 20,
+                    endIndent: 0,
+                    color: Colors.red,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "Female",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: AppColor.textPrimaryColor,
+                          ),
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              "$_countFemale",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: AppColor.textPrimaryColor,
+                              ),
+                            ),
+                            SizedBox(width: 15),
+                            Text(
+                              "Patient(s)",
+                              style: TextStyle(
+                                fontSize: 10,
+                                color: AppColor.textSecondaryColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
             Visibility(
               visible: false,
               child: Column(
@@ -428,25 +533,6 @@ class buildTitle extends StatelessWidget {
             ),
           ],
         ),
-        Container(
-          padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
-          decoration: BoxDecoration(
-            color: AppColor.primaryColor.withOpacity(0.3),
-            borderRadius: BorderRadius.all(Radius.circular(8)),
-          ),
-          child: Column(
-            children: [
-              Text(
-                "Nov",
-                style: TextStyle(color: AppColor.whiteColor),
-              ),
-              Text(
-                "27/2565",
-                style: TextStyle(color: AppColor.whiteColor),
-              ),
-            ],
-          ),
-        )
       ],
     );
   }
