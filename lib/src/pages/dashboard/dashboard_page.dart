@@ -1,6 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_hospital_admin/src/pages/login/login_page.dart';
+import 'package:smart_hospital_admin/src/pages/my_app.dart';
 import 'package:smart_hospital_admin/src/services/auth_service.dart';
 import 'package:smart_hospital_admin/src/services/preferences_service.dart';
 import 'package:smart_hospital_admin/src/utils/my_dialog.dart';
