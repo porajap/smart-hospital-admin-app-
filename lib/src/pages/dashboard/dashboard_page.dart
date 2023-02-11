@@ -63,8 +63,12 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   Future<void> getData() async{
-    await getDataOfDay();
-    await getDataOfYear();
+
+    BotToast.showLoading();
+
+    Future.wait([getDataOfDay(), getDataOfYear()]);
+
+    BotToast.closeAllLoading();
 
     if (mounted) {
       setState(() {});
@@ -107,6 +111,10 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: getData,
+        child: Icon(Icons.refresh),
+      ),
       appBar: MyAppBar(
         title: "Dashboard",
         context: context,
