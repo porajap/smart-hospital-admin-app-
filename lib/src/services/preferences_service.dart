@@ -9,6 +9,7 @@ class PreferenceKey {
   static final String lName = "lName";
   static final String token = "token";
   static final String organizeName = "organizeName";
+  static final String format = "format";
 }
 
 class SharedPreferencesService {
@@ -35,6 +36,7 @@ class SharedPreferencesService {
     _prefs.setString(PreferenceKey.lName, data.data?.lName ?? "");
     _prefs.setString(PreferenceKey.token, data.token ?? "");
     _prefs.setString(PreferenceKey.organizeName, data.data?.organizeName ?? "");
+    _prefs.setInt(PreferenceKey.format, data.data!.format != null ? data.data!.format as int : 2);
   }
 
   Future<String> getToken() async {
@@ -52,6 +54,12 @@ class SharedPreferencesService {
   Future<String> getOrganize() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     String _data = _prefs.getString(PreferenceKey.organizeName) ?? "-";
+    return _data;
+  }
+
+  Future<int> getFormat() async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    int _data = _prefs.getInt(PreferenceKey.format) ?? 2;
     return _data;
   }
 

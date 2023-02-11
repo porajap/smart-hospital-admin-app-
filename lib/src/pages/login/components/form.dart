@@ -19,9 +19,12 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _usernameController = new TextEditingController(text: "");
-  TextEditingController _passwordController = new TextEditingController(text: "");
+  TextEditingController _usernameController =
+      new TextEditingController(text: "");
+  TextEditingController _passwordController =
+      new TextEditingController(text: "");
   bool isEnabledButton = true;
+  bool isShowPassword = false;
 
   @override
   void initState() {
@@ -49,15 +52,18 @@ class _LoginFormState extends State<LoginForm> {
               children: [
                 Text(
                   "ลงชื่อเข้าใช้บัญชีของคุณเพื่อดำเนินการต่อ",
-                  style: TextStyle(color: AppColor.textPrimaryColor, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: AppColor.textPrimaryColor,
+                      fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 10),
                 TextFormField(
                   controller: _usernameController,
                   keyboardType: TextInputType.phone,
-                  decoration: InputDecoration(suffixIcon: SizedBox(), hintText: "ชื่อผู้ใช้งาน"),
-                  validator: (value){
-                    if(value == null || value.length == 0){
+                  decoration: InputDecoration(
+                      suffixIcon: SizedBox(), hintText: "ชื่อผู้ใช้งาน"),
+                  validator: (value) {
+                    if (value == null || value.length == 0) {
                       return '';
                     }
 
@@ -68,9 +74,24 @@ class _LoginFormState extends State<LoginForm> {
                 TextFormField(
                   controller: _passwordController,
                   keyboardType: TextInputType.phone,
-                  decoration: InputDecoration(suffixIcon: SizedBox(), hintText: "รหัสผ่าน"),
-                  validator: (value){
-                    if(value == null || value.length == 0){
+                  obscureText: !isShowPassword,
+                  decoration: InputDecoration(
+                    suffixIcon: InkWell(
+                      onTap: (){
+                        isShowPassword = !isShowPassword;
+
+                        setState(() {
+
+                        });
+                      },
+                      child: isShowPassword
+                          ? Icon(Icons.visibility_outlined)
+                          : Icon(Icons.visibility_off_outlined),
+                    ),
+                    hintText: "รหัสผ่าน",
+                  ),
+                  validator: (value) {
+                    if (value == null || value.length == 0) {
                       return '';
                     }
 
@@ -90,9 +111,12 @@ class _LoginFormState extends State<LoginForm> {
   Widget buildButton() => Container(
         width: MediaQuery.of(context).size.width,
         child: ElevatedButton(
-          onPressed: () async{
+          onPressed: () async {
             if (!_formKey.currentState!.validate()) {
-              MyDialog.dialogCustom(context: context, title: "Error", msg: "กรุณากรอกข้อมูลให้ครบถ้วน");
+              MyDialog.dialogCustom(
+                  context: context,
+                  title: "Error",
+                  msg: "กรุณากรอกข้อมูลให้ครบถ้วน");
 
               return;
             }
@@ -120,14 +144,15 @@ class _LoginFormState extends State<LoginForm> {
     );
     BotToast.closeAllLoading();
 
-
-    if(!_result){
+    if (!_result) {
       Navigator.pushReplacementNamed(context, '/dashboard');
       return;
     }
 
-    MyDialog.dialogCustom(context: context, title: "Error", msg: "username or password is invalid");
-
+    MyDialog.dialogCustom(
+        context: context,
+        title: "Error",
+        msg: "username or password is invalid");
   }
 
   Future<void> checkIsLogin() async {
@@ -135,9 +160,9 @@ class _LoginFormState extends State<LoginForm> {
     isLogin = await pref.getIsLoggedIn();
     BotToast.closeAllLoading();
 
-    if(isLogin){
+    if (isLogin) {
       Navigator.pushReplacementNamed(context, '/dashboard');
       return;
     }
-}
+  }
 }

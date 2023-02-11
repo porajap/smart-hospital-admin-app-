@@ -48,8 +48,13 @@ class _DashboardPageState extends State<DashboardPage> {
 
   final pref = SharedPreferencesService();
   String organizeName = "-";
+  int format = 2; //1 = hos, 2 = general
+  String unitName =  "People";
   Future<void>getUserData() async{
     organizeName = await pref.getOrganize();
+    format = await pref.getFormat();
+    unitName =  format == 1 ? "Patient(s)" : "People";
+
     if(!mounted){
       setState(() {
 
@@ -185,7 +190,7 @@ class _DashboardPageState extends State<DashboardPage> {
               ),
             ),
             Text(
-              "Patient(s)",
+              unitName,
               style: TextStyle(fontSize: 12, color: AppColor.textPrimaryColor.withOpacity(0.5)),
             ),
             SizedBox(height: 10),
@@ -227,7 +232,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 ),
                                 SizedBox(width: 15),
                                 Text(
-                                  "Patient(s)",
+                                  unitName,
                                   style: TextStyle(
                                     fontSize: 10,
                                     color: AppColor.textSecondaryColor,
@@ -276,7 +281,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             ),
                             SizedBox(width: 15),
                             Text(
-                              "Patient(s)",
+                              unitName,
                               style: TextStyle(
                                 fontSize: 10,
                                 color: AppColor.textSecondaryColor,
@@ -340,7 +345,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                         ),
                                         SizedBox(width: 15),
                                         Text(
-                                          "Patient(s)",
+                                          unitName,
                                           style: TextStyle(
                                             fontSize: 10,
                                             color: AppColor.textSecondaryColor,
@@ -390,7 +395,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                   ),
                                   SizedBox(width: 15),
                                   Text(
-                                    "Patient(s)",
+                                    unitName,
                                     style: TextStyle(
                                       fontSize: 10,
                                       color: AppColor.textSecondaryColor,
@@ -464,7 +469,7 @@ class _DashboardPageState extends State<DashboardPage> {
         isResponsive: true,
         position: LegendPosition.bottom,
       ),
-      title: ChartTitle(text: 'Over all Patients of Month 2022'),
+      title: ChartTitle(text: 'Over all ${unitName} of Month 2022'),
       primaryXAxis: _categoryAxis(),
       primaryYAxis: _numericAxis(text: 'คน'),
       series: _getDefaultLineSeries(),
