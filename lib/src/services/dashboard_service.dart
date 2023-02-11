@@ -21,7 +21,7 @@ class DashboardService{
       final _token = await prefService.getToken();
 
       final _header = {
-        HttpHeaders.authorizationHeader: '$_token',
+        'authorization': 'Bearer $_token',
       };
 
       final _year = DateTime.now().year;
@@ -52,7 +52,7 @@ class DashboardService{
       final _token = await prefService.getToken();
 
       final _header = {
-        HttpHeaders.authorizationHeader: '$_token',
+        'authorization': 'Bearer $_token',
       };
 
       final _url = Uri.parse('${AppUrl.dataOfDay}');
@@ -66,8 +66,6 @@ class DashboardService{
       final _jsonResponse = json.decode(_response.body);
 
       _data = DataOfDayModel.fromJson(_jsonResponse);
-
-      logger.i(_data.toJson());
 
       return _data;
     } catch (err) {

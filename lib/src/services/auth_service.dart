@@ -42,7 +42,6 @@ class AuthService {
       final _jsonResponse = json.decode(_response.body);
 
       _data = LoggedModel.fromJson(_jsonResponse);
-
       bool _error = _data.error ?? false;
       if(!_error){
         await prefService.setIsLoggedIn(isLogin: true);

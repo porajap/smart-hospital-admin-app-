@@ -77,10 +77,13 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Future<void> getDataOfDay() async{
     dataOfDay = await dashboardService.getDataOfDay();
+
+    logger.i(dataOfDay.toJson());
   }
 
   Future<void> getDataOfYear() async {
     dataOfYear = await dashboardService.getDataOfYear();
+    logger.w(dataOfYear.toJson());
 
     if (dataOfYear.data?.men != null) {
       var _data = dataOfYear.data?.men ?? [];
